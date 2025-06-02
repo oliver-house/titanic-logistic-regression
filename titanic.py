@@ -1,4 +1,6 @@
 # We use logistic regression to predict who survived and who died out of a sample of over 400 passengers on the Titanic
+# Datasets used and inspiration for this project are from the following Kaggle competition: https://www.kaggle.com/competitions/titanic
+# Used for non-commercial, educational purposes under the competition rules
 
 import pandas as pd
 import numpy as np
