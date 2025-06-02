@@ -18,7 +18,7 @@ I chose logistic regression as an initial model since it is a relatively simple 
 
 ## Validation
 
-We use repeated stratified K-fold cross-validation to evaluate our model by randomly dividing the training data into 5 groups, where each group has the same survival rate as the full training data. For each one of these groups, we train our model on the remaining 4 groups and derive predictions for the remaining group. We then see how accurately the model predicted survival in the remaining group. We repeat this process across all 5 groups, and repeat the entire cycle 10 times, yielding a sample of 50 accuracy scores. This sample has mean 80% (±3%), indicating that the model provides non-trivial insights. 
+We use repeated stratified K-fold cross-validation to evaluate our model by randomly dividing the training data into 5 groups, where each group has the same survival rate as the full training data. For each one of these groups, we train our model on the remaining 4 groups to derive predictions for the specified group. We then see how accurately the model predicted survival in the specified group. We repeat this process across all 5 groups, and repeat the entire cycle 10 times, yielding a sample of 50 accuracy scores. This sample has mean 80% (±3%), indicating that the model provides non-trivial insights. 
 
 ## Results
 
