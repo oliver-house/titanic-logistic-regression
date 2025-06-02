@@ -34,4 +34,4 @@ This project demonstrates skills in implementing industry-standard tools in Pyth
 
 ## Acknowledgements
 
-The datasets and inspiration for the project came from the Kaggle competition [Titanic - Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic). Both datasets used (`train.csv`, `test.csv`) were provided by Kaggle and are used here for non-commercial, educational purposes under their terms of use.
+The datasets and inspiration for the project came from the Kaggle competition [Titanic - Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic). Both datasets (`train.csv`, `test.csv`) are used here for non-commercial, educational purposes under their [competition rules](https://www.kaggle.com/competitions/titanic/rules#7-competition-data).
