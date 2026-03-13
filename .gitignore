@@ -17,5 +17,4 @@ Thumbs.db
 venv/
 
 # Generated output files
-predictions.csv
-figures/
+outputs/

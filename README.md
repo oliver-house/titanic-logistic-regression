@@ -4,7 +4,7 @@ In this project, I take a sample of over 800 passengers on the Titanic (`train.c
 
 ## Methodology
 
-I chose logistic regression as an initial model since it is a relatively simple machine learning method suitable for binary classification tasks. I also chose to keep the feature engineering simple to focus on building a clean baseline model. No hyperparameter tuning was carried out and only a small number of raw features were used, however I intend to build upon this foundation.
+I chose logistic regression as an initial model since it is a relatively simple machine learning method suitable for binary classification tasks. I also chose to keep the feature engineering simple to focus on building a clean baseline model. No hyperparameter tuning was carried out and only a small number of raw features were used.
 
 ## Validation
 
@@ -12,7 +12,7 @@ I use repeated stratified K-fold cross-validation to evaluate the model by rando
 
 ## Results
 
-Once complete, the program creates a new CSV file (`predictions.csv`) with predictions for whether they survived (1) or died (0). Via submission to Kaggle, I can confirm that the model achieved an accuracy of 0.76076 (76%) for predictions on the test set `test.csv`, which is broadly consistent with the cross-validation estimate of 0.80 ± 0.03. 
+Once complete, the program saves a CSV file (`outputs/predictions.csv`) with predictions for whether they survived (1) or died (0). Via submission to Kaggle, I can confirm that the model achieved an accuracy of 0.76076 (76%) for predictions on the test set `test.csv`, which is broadly consistent with the cross-validation estimate of 0.80 ± 0.03. 
 
 ## Scope for further development
 

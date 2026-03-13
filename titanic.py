@@ -21,16 +21,10 @@ def impute_training_ages(df):
 
 def impute_testing_ages(df1, df2):
     """ Imputes missing ages in df2 using median age for those with the same gender and class of ticket in df1 """
-    median_ages = df1.groupby(['Pclass', 'Sex'])['Age'].median()
-
-    def impute_age(row):
-        """ Imputes missing ages using medians from training data for a given row """
-        if pd.isna(row['Age']):
-            return median_ages.loc[row['Pclass'], row['Sex']]
-        return row['Age']
-
-    df2['Age'] = df2.apply(impute_age, axis=1)
-    return df2
+    median_ages = df1.groupby(['Pclass', 'Sex'])['Age'].median().reset_index(name='median_age')
+    df2 = df2.merge(median_ages, on=['Pclass', 'Sex'], how='left')
+    df2['Age'] = df2['Age'].fillna(df2['median_age'])
+    return df2.drop(columns=['median_age'])
 
 def impute_testing_fares(df1, df2):
     """ Imputes missing fare values as the median """
@@ -44,13 +38,13 @@ def impute_training_embarked(df):
 
 def graphs(df):
     """ Saves three bar plots """
-    os.makedirs('figures', exist_ok=True)
+    os.makedirs('outputs', exist_ok=True)
     df['Survived'].value_counts().plot(kind='bar')
     plt.title('Survival Totals')
     plt.xlabel('Outcome')
     plt.ylabel('Total')
     plt.xticks(rotation=0)
-    plt.savefig(os.path.join('figures', 'survival_totals.png'))
+    plt.savefig(os.path.join('outputs', 'survival_totals.png'))
     plt.close()
 
     df.groupby('Sex')['Survived'].mean().plot(kind='bar')
@@ -58,7 +52,7 @@ def graphs(df):
     plt.xlabel('Gender')
     plt.ylabel('Survival Rate')
     plt.xticks(rotation=0)
-    plt.savefig(os.path.join('figures', 'survival_by_gender.png'))
+    plt.savefig(os.path.join('outputs', 'survival_by_gender.png'))
     plt.close()
 
     df.groupby('Pclass')['Survived'].mean().plot(kind='bar')
@@ -66,7 +60,7 @@ def graphs(df):
     plt.xlabel('Class of Ticket')
     plt.ylabel('Survival Rate')
     plt.xticks(rotation=0)
-    plt.savefig(os.path.join('figures', 'survival_by_class.png'))
+    plt.savefig(os.path.join('outputs', 'survival_by_class.png'))
     plt.close()
 
 def exploratory_data_analysis(df, name='Dataset', show_summary=True, show_graphs=True):
@@ -113,27 +107,19 @@ if __name__ == '__main__':
         print(f"Error: {fnfe}")
         exit(1)
 
-    # Print summary statistics and save bar plots
-
     exploratory_data_analysis(train, name='Training data')
     exploratory_data_analysis(test, name='Testing data')
-
-    # Drop columns of limited predictive value
 
     drop_uninformative_columns(train)
     drop_uninformative_columns(test)
 
-    # Impute missing values
-
     impute_training_ages(train)
-    impute_testing_ages(train, test)
+    test = impute_testing_ages(train, test)
     impute_testing_fares(train, test)
     impute_training_embarked(train)
 
     train = encode_categoricals(train)
     test = encode_categoricals(test)
-
-    # Reformat for logistic regression
 
     prepared = prepare_for_modelling(train, test)
 
@@ -143,11 +129,7 @@ if __name__ == '__main__':
 
     repeated_cross_validation(model, prepared)
 
-    # Apply logistic regression model to full training data to obtain predictions for testing data
-
     predictions = predict(model, prepared)
 
-    # Write predictions to CSV
-
     submission = pd.DataFrame({'PassengerId':test['PassengerId'], 'Survived':predictions})
-    submission.to_csv('predictions.csv', index=False)
+    submission.to_csv(os.path.join('outputs', 'predictions.csv'), index=False)
