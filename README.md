@@ -1,6 +1,6 @@
 # Titanic Survival Predictions Using Machine Learning
 
-In this project, I take a sample of over 800 passengers on the Titanic (`train.csv`), including their age, gender, class of ticket, and whether or not they survived. I also take a different sample of over 400 passengers (`test.csv`), with the same data provided, except for whether or not they survived. I apply logistic regression, a machine learning method, to the data in `train.csv` to predict survival outcomes for passengers in `test.csv`. Both datasets are provided as CSV files, which I convert into `pandas` dataframes for data cleaning and then to inform my predictions.
+In this project, I take a sample of over 800 passengers on the Titanic (`train.csv`), including their age, gender, class of ticket, and whether or not they survived. I also take a different sample of over 400 passengers (`test.csv`), with the same data provided, except for whether or not they survived. I apply logistic regression to the data in `train.csv` to predict survival outcomes for passengers in `test.csv`.
 
 ## Methodology
 
@@ -8,7 +8,7 @@ I chose logistic regression as an initial model since it is a relatively simple 
 
 ## Validation
 
-I use repeated stratified K-fold cross-validation to evaluate the model by randomly dividing the training data into 5 groups, where each group has the same survival rate as the full training data. For each one of these groups, I train the model on the remaining 4 groups to derive predictions for the specified group. I then see how accurately the model predicted survival in the specified group. I repeat this process across all 5 groups, and repeat the entire cycle 10 times, yielding a sample of 50 accuracy scores. This sample has mean 80% (±3%), indicating that the model provides non-trivial insights.
+I use repeated stratified K-fold cross-validation to evaluate the model by randomly dividing the training data into 5 groups, where each group has the same survival rate as the full training data. For each one of these groups, I train the model on the remaining 4 groups to derive predictions for the specified group. I then see how accurately the model predicted survival in the specified group. I repeat this process across all 5 groups, and repeat the entire cycle 10 times, yielding a sample of 50 accuracy scores with mean 80% (±3%).
 
 ## Results
 

@@ -1,6 +1,4 @@
 # Logistic regression model to predict survival outcomes for passengers on the Titanic
-# Datasets used and inspiration for this project are from the following Kaggle competition: https://www.kaggle.com/competitions/titanic
-# Used for non-commercial, educational purposes under the competition rules
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -63,14 +61,6 @@ def graphs(df):
     plt.savefig(os.path.join('outputs', 'survival_by_class.png'))
     plt.close()
 
-def exploratory_data_analysis(df, name='Dataset', show_summary=True, show_graphs=True):
-    """ Displays summary statistics and graphs """
-    if show_summary:
-        print(f"{name}: ")
-        print(df.describe())
-        print('Missing values: ', df.isna().sum())
-    if show_graphs and 'Survived' in df.columns:
-        graphs(df)
 
 def encode_categoricals(df):
     """ One-hot encodes categorical variables """
@@ -99,7 +89,6 @@ def predict(model, data):
     return model.predict(data[2])
 
 if __name__ == '__main__':
-
     try:
         train = pd.read_csv('train.csv')
         test = pd.read_csv('test.csv')
@@ -107,29 +96,18 @@ if __name__ == '__main__':
         print(f"Error: {fnfe}")
         exit(1)
 
-    exploratory_data_analysis(train, name='Training data')
-    exploratory_data_analysis(test, name='Testing data')
-
+    graphs(train)
     drop_uninformative_columns(train)
     drop_uninformative_columns(test)
-
     impute_training_ages(train)
     test = impute_testing_ages(train, test)
     impute_testing_fares(train, test)
     impute_training_embarked(train)
-
     train = encode_categoricals(train)
     test = encode_categoricals(test)
-
     prepared = prepare_for_modelling(train, test)
-
-    # Choose 5000 iterations for convergence to prevent early termination
-
-    model = LogisticRegression(max_iter=5000)
-
+    model = LogisticRegression(max_iter=5000) # Choose 5000 iterations for convergence to prevent early termination
     repeated_cross_validation(model, prepared)
-
     predictions = predict(model, prepared)
-
     submission = pd.DataFrame({'PassengerId':test['PassengerId'], 'Survived':predictions})
     submission.to_csv(os.path.join('outputs', 'predictions.csv'), index=False)
