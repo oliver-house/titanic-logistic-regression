@@ -1,4 +1,4 @@
-# Logistic regression model to predict survival outcomes for passengers on the Titanic
+"""Logistic regression model to predict survival outcomes for passengers on the Titanic"""
 
 import pandas as pd
 import matplotlib.pyplot as plt
