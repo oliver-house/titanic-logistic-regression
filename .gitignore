@@ -16,5 +16,9 @@ Thumbs.db
 # Virtual environment
 venv/
 
+# Kaggle datasets
+train.csv
+test.csv
+
 # Generated output files
 outputs/

@@ -18,6 +18,10 @@ Once complete, the program saves a CSV file (`outputs/predictions.csv`) with pre
 
 More powerful models will likely yield more accurate predictions. More intensive feature engineering, such as extracting titles from the 'Name' columns, could yield further insights. This project serves as a foundation for more advanced modelling work.
 
+## Usage
+
+Download `train.csv` and `test.csv` from the [Kaggle competition page](https://www.kaggle.com/competitions/titanic/data) and place them in the project root, then run `titanic.py`.
+
 ## Acknowledgements
 
 The datasets and inspiration for the project came from the Kaggle competition [Titanic - Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic). Both datasets (`train.csv`, `test.csv`) are used here for non-commercial, educational purposes under their [competition rules](https://www.kaggle.com/competitions/titanic/rules#7-competition-data).
