@@ -74,7 +74,7 @@ def prepare_for_modelling(df1, df2):
     return (X_train, y_train, X_test)
 
 def repeated_cross_validation(model, data, folds=5, repeats=10, rand_state=343, scoring='accuracy'):
-    """ Performs repeated stratified K-fold cross-validation on the training data to test its accuracy """
+    """ Performs repeated stratified K-fold cross-validation on the training data to test the model's accuracy """
     cross_val = RepeatedStratifiedKFold(n_splits=folds, n_repeats=repeats, random_state=rand_state)
     scores = cross_val_score(model, data[0], data[1], cv=cross_val, scoring=scoring)
     print(f"Mean accuracy percentage: {100*scores.mean():.0f} ± {100*scores.std():.0f}")
