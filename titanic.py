@@ -1,4 +1,4 @@
-# We use logistic regression to predict who survived and who died out of a sample of over 400 passengers on the Titanic
+# Logistic regression model to predict survival outcomes for passengers on the Titanic
 # Datasets used and inspiration for this project are from the following Kaggle competition: https://www.kaggle.com/competitions/titanic
 # Used for non-commercial, educational purposes under the competition rules
 
@@ -44,6 +44,7 @@ def impute_training_embarked(df):
 
 def graphs(df):
     """ Saves three bar plots """
+    os.makedirs('figures', exist_ok=True)
     df['Survived'].value_counts().plot(kind='bar')
     plt.title('Survival Totals')
     plt.xlabel('Outcome')
@@ -140,15 +141,7 @@ if __name__ == '__main__':
 
     model = LogisticRegression(max_iter=5000)
 
-    # Cross-validation with 80% for training, 20% for testing
-    # Gives 50 accuracy scores using 10 different splits of the data, with 5 portions or 'folds' each time
-    # Then computes mean and sample standard deviation of these 50 scores
-
     repeated_cross_validation(model, prepared)
-
-    # Cross-validation gives mean accuracy of 80%, with sample standard deviation of 3%
-    # I ran this with 20 times the number of 'shuffles' of the training data, giving 80 ± 3 again
-    # Indicates that the mean and sample standard deviation that I obtained are stable and reliable
 
     # Apply logistic regression model to full training data to obtain predictions for testing data
 
