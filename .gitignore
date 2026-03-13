@@ -1,0 +1,18 @@
+# Bytecode and cache
+__pycache__/
+*.pyc
+
+# VS Code and other IDE configurations
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Generated output files
+predictions.csv
+figures/
