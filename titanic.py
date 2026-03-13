@@ -3,7 +3,6 @@
 # Used for non-commercial, educational purposes under the competition rules
 
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import RepeatedStratifiedKFold, cross_val_score
@@ -11,8 +10,8 @@ from sklearn.exceptions import ConvergenceWarning
 import warnings
 import os
 
-def drop_useless_columns(df):
-    """ Removes columns for name, class of ticket and cabin number """
+def drop_uninformative_columns(df):
+    """ Drops name, ticket, and cabin columns due to low predictive value """
     df.drop(columns=['Name', 'Ticket', 'Cabin'], inplace=True)
 
 def impute_training_ages(df):
@@ -78,8 +77,8 @@ def exploratory_data_analysis(df, name='Dataset', show_summary=True, show_graphs
     if show_graphs and 'Survived' in df.columns:
         graphs(df)
 
-def get_dums(df):
-    """ Uses one-hot encoding to replace categorical variables with binary ones """
+def encode_categoricals(df):
+    """ One-hot encodes categorical variables """
     return pd.get_dummies(df, columns=['Sex', 'Embarked'], drop_first=True)
 
 def prepare_for_modelling(df1, df2):
@@ -106,8 +105,6 @@ def predict(model, data):
 
 if __name__ == '__main__':
 
-    np.random.seed(343)
-
     try:
         train = pd.read_csv('train.csv')
         test = pd.read_csv('test.csv')
@@ -122,8 +119,8 @@ if __name__ == '__main__':
 
     # Drop columns of limited predictive value
 
-    drop_useless_columns(train)
-    drop_useless_columns(test)
+    drop_uninformative_columns(train)
+    drop_uninformative_columns(test)
 
     # Impute missing values
 
@@ -132,8 +129,8 @@ if __name__ == '__main__':
     impute_testing_fares(train, test)
     impute_training_embarked(train)
 
-    train = get_dums(train)
-    test = get_dums(test)
+    train = encode_categoricals(train)
+    test = encode_categoricals(test)
 
     # Reformat for logistic regression
 
