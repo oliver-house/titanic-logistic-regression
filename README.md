@@ -8,7 +8,7 @@ I chose logistic regression as an initial model since it is a relatively simple 
 
 ## Results
 
-Using repeated stratified K-fold cross-validation (5 folds, 10 repeats), the model achieves a mean accuracy of 80% (±3%) on `train.csv`. Submission to Kaggle gives an accuracy of 76% on `test.csv`, broadly consistent with the cross-validation estimate.
+Predictions are saved to `outputs/predictions.csv` (1 = survived, 0 = died). Using repeated stratified K-fold cross-validation (5 folds, 10 repeats), the model achieves a mean accuracy of 80% (±3%) on `train.csv`. Submission to Kaggle gives an accuracy of 76% on `test.csv`, broadly consistent with the cross-validation estimate.
 
 ## Scope for further development
 
