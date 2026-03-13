@@ -15,7 +15,6 @@ def drop_uninformative_columns(df):
 def impute_training_ages(df):
     """ Imputes missing ages using median age for those with the same gender and class of ticket """
     df['Age'] = df['Age'].fillna(df.groupby(['Pclass', 'Sex'])['Age'].transform('median'))
-    return df
 
 def impute_testing_ages(df1, df2):
     """ Imputes missing ages in df2 using median age for those with the same gender and class of ticket in df1 """
@@ -27,12 +26,10 @@ def impute_testing_ages(df1, df2):
 def impute_testing_fares(df1, df2):
     """ Imputes missing fare values as the median """
     df2['Fare'] = df2['Fare'].fillna(df1['Fare'].median())
-    return df2
 
 def impute_training_embarked(df):
     """ Imputes missing points of embarkation as the mode """
     df['Embarked'] = df['Embarked'].fillna(df['Embarked'].mode()[0])
-    return df
 
 def graphs(df):
     """ Saves three bar plots """
@@ -69,23 +66,24 @@ def encode_categoricals(df):
 def prepare_for_modelling(df1, df2):
     """ Reformats the data in preparation for logistic regression modelling """
     X_train = df1.drop(columns=['Survived'])
-    y_train = df1['Survived'] 
+    y_train = df1['Survived']
     X_test = df2.reindex(columns=X_train.columns, fill_value=0)
     return (X_train, y_train, X_test)
 
 def repeated_cross_validation(model, data, folds=5, repeats=10, rand_state=343, scoring='accuracy'):
-    """ Performs repeated stratified K-fold cross-validation on the training data to test the model's accuracy """
+    """ Performs repeated stratified K-fold cross-validation on the training data to estimate the model's accuracy """
     cross_val = RepeatedStratifiedKFold(n_splits=folds, n_repeats=repeats, random_state=rand_state)
     scores = cross_val_score(model, data[0], data[1], cv=cross_val, scoring=scoring)
     print(f"Mean accuracy percentage: {100*scores.mean():.0f} ± {100*scores.std():.0f}")
 
 def predict(model, data):
-    """ Performs logistic regression to obtain predictions """
+    """ Fits the model and returns predictions for the test set """
     warnings.filterwarnings('error', category=ConvergenceWarning)
     try:
         model.fit(data[0], data[1])
     except ConvergenceWarning:
         print('Convergence too slow.')
+        exit(1)
     return model.predict(data[2])
 
 if __name__ == '__main__':
