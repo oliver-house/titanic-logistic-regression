@@ -17,8 +17,7 @@ Thumbs.db
 venv/
 
 # Kaggle datasets
-train.csv
-test.csv
+data/
 
 # Generated output files
 outputs/

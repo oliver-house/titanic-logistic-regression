@@ -16,7 +16,7 @@ More powerful models will likely yield more accurate predictions. More intensive
 
 ## Usage
 
-Download `train.csv` and `test.csv` from the [Kaggle competition page](https://www.kaggle.com/competitions/titanic/data) and place them in the project root, then run `titanic.py`.
+Download `train.csv` and `test.csv` from the [Kaggle competition page](https://www.kaggle.com/competitions/titanic/data) and place them in a `data/` subfolder, then run `script.py`.
 
 ## Acknowledgements
 
