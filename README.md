@@ -1,4 +1,4 @@
-# Titanic Survival Predictions Using Machine Learning
+# Binary Classification with Logistic Regression
 
 I apply logistic regression to the Titanic training data (`train.csv`) to predict survival outcomes for passengers in `test.csv`.
 
